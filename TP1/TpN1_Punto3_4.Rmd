@@ -1,0 +1,184 @@
+---
+title: "Analisis inteligente de datos TP 1 - PUNTOS 3 y 4"
+output:
+  html_notebook: default
+---
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+#deshabilitar la notacion cientifica
+options(scipen=999)
+#limpio memoria
+rm(list=ls())
+gc()
+#cargo librerias
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(data.table)
+library(ggplot2)
+library(plotly)
+library(summarytools)
+
+setwd("C:/Cursos/mcd/austral-mcd-aid/TP1")
+
+getwd()
+```
+
+PUNTO 3- Estadísticas descriptivas y gráficos.
+
+Leemos el dataframe resultante del punto 1 "Clientes_Mar21"
+
+```{r}
+Clientes_Mar21 <- read_csv("C:/Cursos/mcd/datasets/AID/TP1/Clientes_Mar21.csv")
+
+#casteo la columna CLTecno a factor.
+Clientes_Mar21$CL_TECNO <- as.factor(Clientes_Mar21$CL_TECNO)
+Clientes_Mar21$BASE_STAT_03 <- as.factor(Clientes_Mar21$BASE_STAT_03)
+
+head(Clientes_Mar21)
+```
+
+Realizamos un resumen estadístico del dataframe
+
+```{r}
+summary(Clientes_Mar21)
+```
+Del resumen estadístico, podemos notar:
+
+-Presencia de ouliers en todas variables cualitativas.
+
+-Vemos que la media siempre es mayor a la mediana, los que nos sugiere
+ una distribución asimétrica sesgada hacia la derecha.
+
+```{r}
+freq(Clientes_Mar21$BASE_STAT_03, plain.ascii = FALSE, style = "rmarkdown")
+freq(Clientes_Mar21$CL_TECNO, plain.ascii = FALSE, style = "rmarkdown")
+```
+
+De las frecuencias podemos inferir:
+
+-Vemos una marcada mayoría de clientes ACTIVE BASE con mas del 96% sobre
+ los clientes REJOINER
+ 
+-tenemos un 38.5% en el segmento 99-NOSEGM
+ esto nos dice que existen 498.446 clientes ACTIVE/ REJOINER que realizaron
+ menos de 3 recargas entre enero y marzo.
+ 
+
+```{r}
+#Cantidad de clientes por segmento y grupo
+aux_data<-Clientes_Mar21 %>% group_by(CL_TECNO,BASE_STAT_03) %>%
+          summarise(cant = n())
+
+ggplot(aux_data, aes(x=CL_TECNO,y=cant, fill=BASE_STAT_03))+
+  geom_bar(stat="identity",color='black')+
+  scale_fill_brewer(palette='Set2')+
+  coord_flip()+
+  labs(x="Segmentos",  y="Cantidad de clientes")+
+  ggtitle("Cantidad de clientes por segmento y grupo")
+
+```
+-Del gráfico anterior podemos notar que la mayoría de los clientes REJOINER
+ realizaron menos de TRES recargas en los últimos tres meses.
+ Sin embargo, para el resto de los segmentos, es notable la mayoría de los 
+ clientes ACTIVE BASE
+ 
+ 
+```{r}
+
+#Cantidad de recargas por segm y grupo
+aux2 <- aggregate(CANT_RECARGAS ~ CL_TECNO + BASE_STAT_03, data = Clientes_Mar21, FUN = sum)
+ggplot(aux2, aes(x=CL_TECNO,y=CANT_RECARGAS, fill=BASE_STAT_03))+
+  geom_bar(stat="identity",color='black')+
+  scale_fill_brewer(palette='Set2')+
+  coord_flip()+
+  labs(x="Segmentos",  y="Cantidad de recargas")+
+  ggtitle("Cantidad de recargas por segm y grupo")
+
+#Monto de recargas por segmento y grupo
+aux3 <- aggregate(MONTO_TOTAL ~ CL_TECNO + BASE_STAT_03, data = Clientes_Mar21, FUN = sum)
+ggplot(aux3, aes(x=CL_TECNO,y=MONTO_TOTAL, fill=BASE_STAT_03))+
+  geom_bar(stat="identity",color='black')+
+  scale_fill_brewer(palette='Set2')+
+  coord_flip()+
+  labs(x="Segmentos",  y="Monto de recargas")+
+  ggtitle("Monto de recargas por segm y grupo")
+
+```
+Respecto al MONTO y la CANTIDAD de recargas por segmento y grupo.
+
+-vemos una fuerte relación entre estas variables, practicamente los gráficos
+ tienen una distribución similar.
+ 
+-También podemos ver que el segmento dominante tanto en cantidad y en monto
+ es 4-No Tecno, es decir, que los clientes siguen prefiriendo la recarga
+ manual
+ 
+*POR UN TEMA DE RENDIMINETO
+*para los siguientes gráficos tomo una muestra de 10000 registros
+
+```{r}
+#TOMO UNA MUESTRA RANDOM DE n=10000 para agilizar los graficos
+n <- 10000
+cli_sample <- Clientes_Mar21[sample(nrow(Clientes_Mar21),n,replace = FALSE),]
+
+ggplot(filter(cli_sample, CL_TECNO!='99-NOSEGM'), aes(x=CL_TECNO, y=CANT_RECARGAS, fill = CL_TECNO)) + 
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=2, size=3)+
+  labs(x="Segmentacon",  y="Recargas ",color="Tipo")
+
+
+ggplot(filter(cli_sample, CL_TECNO!='99-NOSEGM'), aes(x=CL_TECNO, y=MONTO_TOTAL, fill = CL_TECNO)) + 
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=2, size=3)+
+  labs(x="Segmentacon",  y="Monto",color="Tipo")
+
+
+```
+En los gráficos de box plot, tanto para MONTO y CANTIDAD
+
+-Notamos gran cantidad de valores atípicos (outliers), mas allá de los casos
+ extremos leves
+
+-vemos también una gran similitud en la dispersión de los segmentos 1,2 y 4
+-La mediana es muy similar en los segmentos 1 y 2
+
+
+```{r}
+# MONTO por segmento
+cli_sample%>%filter( CL_TECNO!='99-NOSEGM' ) %>% 
+  ggplot(aes(x=MONTO_TOTAL,fill=CL_TECNO,color=CL_TECNO))+
+  facet_wrap(~CL_TECNO) +
+  geom_histogram( binwidth=1,show.legend=FALSE, alpha=0.9)+
+  labs(y = "Montos",x = "")
+
+# RECARGAS por segmento
+cli_sample%>%filter( CL_TECNO!='99-NOSEGM' ) %>% 
+  ggplot(aes(x=CANT_RECARGAS,fill=CL_TECNO,color=CL_TECNO))+
+  facet_wrap(~CL_TECNO) +
+  geom_histogram( binwidth=1,show.legend=FALSE, alpha=0.9)+
+  labs(y = "Recargas",x = "")
+```
+PUNTO 4
+
+Como conclusión sobre el comportamiento de los segmentos, respecto al monto 
+y a la cantidad de recargas. Podríamos decir:
+
+1.	Más allá del segmento que se estudie, una marcada relación entre las 
+    variables MONTO_TOTAL y CANT_RECARGAS
+2.	EL 21.6% de los clientes el canal tecnológico para realizar recargas, 
+    está lejos del 40% de clientes que no lo uso nunca, lo cual podría ser 
+    una dificultad a la hora de plantear una migración. 
+
+3.	En los meses estudiados, el segmento predominante, tanto en recargas como 
+    en monto, fue el “4-No Tecno”. Esto nos dice que casi el 40% de los clientes
+    NO UTILIZA canales de recargas tecnológicos.
+    
+4.	Hay un 38.5% de clientes ACTIVE BASE o REJOINER que no realizaron cargas 
+    significativas (menos de 3) en los meses estudiados.
+
+
+
+
+

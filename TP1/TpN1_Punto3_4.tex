@@ -1,0 +1,533 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Analisis inteligente de datos TP 1- PUNTOS 3 y 4},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Analisis inteligente de datos TP 1- PUNTOS 3 y 4}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#deshabilitar la notacion cientifica}
+\FunctionTok{options}\NormalTok{(}\AttributeTok{scipen=}\DecValTok{999}\NormalTok{)}
+\CommentTok{\#limpio memoria}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{())}
+\FunctionTok{gc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          used (Mb) gc trigger (Mb) max used (Mb)
+## Ncells 401330 21.5     827187 44.2   638940 34.2
+## Vcells 729002  5.6    8388608 64.0  1633606 12.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#cargo librerias}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.0     v dplyr   1.0.5
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(data.table)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'data.table'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     between, first, last
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     transpose
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(plotly)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plotly'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     filter
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:graphics':
+## 
+##     layout
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(summarytools)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'pryr':
+##   method      from
+##   print.bytes Rcpp
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'summarytools'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tibble':
+## 
+##     view
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/Cursos/mcd/austral{-}mcd{-}aid/TP1"}\NormalTok{)}
+
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Cursos/mcd/austral-mcd-aid/TP1"
+\end{verbatim}
+
+PUNTO 3- Estadisticas descriptivas y graficos. Leemos la rable
+resultante del punto
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Clientes\_Mar21 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"C:/Cursos/mcd/datasets/AID/TP1/Clientes\_Mar21.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ACCS_MTHD_CD = col_double(),
+##   BASE_STAT_03 = col_character(),
+##   MONTO_TOTAL = col_double(),
+##   MONTO_TECNO = col_double(),
+##   POR_TECNO_M = col_double(),
+##   CANT_RECARGAS = col_double(),
+##   CANT_RTEC = col_double(),
+##   POR_TECNO = col_double(),
+##   CL_TECNO = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#casteo la columna CLTecno a factor.}
+\NormalTok{Clientes\_Mar21}\SpecialCharTok{$}\NormalTok{CL\_TECNO }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(Clientes\_Mar21}\SpecialCharTok{$}\NormalTok{CL\_TECNO)}
+\NormalTok{Clientes\_Mar21}\SpecialCharTok{$}\NormalTok{BASE\_STAT\_03 }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(Clientes\_Mar21}\SpecialCharTok{$}\NormalTok{BASE\_STAT\_03)}
+
+\FunctionTok{head}\NormalTok{(Clientes\_Mar21)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 9
+##   ACCS_MTHD_CD BASE_STAT_03 MONTO_TOTAL MONTO_TECNO POR_TECNO_M CANT_RECARGAS
+##          <dbl> <fct>              <dbl>       <dbl>       <dbl>         <dbl>
+## 1    120008596 ACTIVE BASE           31           0         0               7
+## 2    120009284 ACTIVE BASE           11           0         0               3
+## 3    120009978 ACTIVE BASE           70          70       100               7
+## 4    120010448 ACTIVE BASE           13          10        76.9             3
+## 5    120011608 REJOINNER              0           0         0               0
+## 6    120012796 ACTIVE BASE            0           0         0               0
+## # ... with 3 more variables: CANT_RTEC <dbl>, POR_TECNO <dbl>, CL_TECNO <fct>
+\end{verbatim}
+
+Realizamos un resumen estadistico del dataframe
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Clientes\_Mar21)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ACCS_MTHD_CD            BASE_STAT_03      MONTO_TOTAL       MONTO_TECNO     
+##  Min.   :120008596   ACTIVE BASE:1226943   Min.   :   0.00   Min.   :  0.000  
+##  1st Qu.:131040072   REJOINNER  :  45890   1st Qu.:   5.00   1st Qu.:  0.000  
+##  Median :134625010                         Median :  17.00   Median :  0.000  
+##  Mean   :134106292                         Mean   :  25.93   Mean   :  4.968  
+##  3rd Qu.:136816224                         3rd Qu.:  44.00   3rd Qu.:  3.000  
+##  Max.   :139988818                         Max.   :1140.00   Max.   :845.000  
+##   POR_TECNO_M     CANT_RECARGAS       CANT_RTEC        POR_TECNO     
+##  Min.   :  0.00   Min.   :  0.000   Min.   :  0.00   Min.   :  0.00  
+##  1st Qu.:  0.00   1st Qu.:  1.000   1st Qu.:  0.00   1st Qu.:  0.00  
+##  Median :  0.00   Median :  4.000   Median :  0.00   Median :  0.00  
+##  Mean   : 15.11   Mean   :  5.904   Mean   :  1.02   Mean   : 15.03  
+##  3rd Qu.:  7.89   3rd Qu.: 10.000   3rd Qu.:  1.00   3rd Qu.:  8.33  
+##  Max.   :100.00   Max.   :226.000   Max.   :136.00   Max.   :100.00  
+##        CL_TECNO     
+##  1-Tecno   : 88107  
+##  2-Mix4070 : 50771  
+##  3-MixH40  :136088  
+##  4-No Tecno:508421  
+##  99-NOSEGM :489446  
+## 
+\end{verbatim}
+
+Del resumen estadistico, podemos notar:
+
+-Presencia de ouliers en todas variables cualitativas.
+
+-Vemos que la media siempre es mayor a la mediana, los que nos sigiere
+una distribucion asimetrica sesgada hacia la derecha.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Clientes\_Mar21}\SpecialCharTok{$}\NormalTok{BASE\_STAT\_03, }\AttributeTok{plain.ascii =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{style =} \StringTok{"rmarkdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ### Frequencies  
+## #### Clientes_Mar21$BASE_STAT_03  
+## **Type:** Factor  
+## 
+## |          &nbsp; |    Freq | % Valid | % Valid Cum. | % Total | % Total Cum. |
+## |----------------:|--------:|--------:|-------------:|--------:|-------------:|
+## | **ACTIVE BASE** | 1226943 |   96.39 |        96.39 |   96.39 |        96.39 |
+## |   **REJOINNER** |   45890 |    3.61 |       100.00 |    3.61 |       100.00 |
+## |      **\<NA\>** |       0 |         |              |    0.00 |       100.00 |
+## |       **Total** | 1272833 |  100.00 |       100.00 |  100.00 |       100.00 |
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Clientes\_Mar21}\SpecialCharTok{$}\NormalTok{CL\_TECNO, }\AttributeTok{plain.ascii =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{style =} \StringTok{"rmarkdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ### Frequencies  
+## #### Clientes_Mar21$CL_TECNO  
+## **Type:** Factor  
+## 
+## |         &nbsp; |    Freq | % Valid | % Valid Cum. | % Total | % Total Cum. |
+## |---------------:|--------:|--------:|-------------:|--------:|-------------:|
+## |    **1-Tecno** |   88107 |    6.92 |         6.92 |    6.92 |         6.92 |
+## |  **2-Mix4070** |   50771 |    3.99 |        10.91 |    3.99 |        10.91 |
+## |   **3-MixH40** |  136088 |   10.69 |        21.60 |   10.69 |        21.60 |
+## | **4-No Tecno** |  508421 |   39.94 |        61.55 |   39.94 |        61.55 |
+## |  **99-NOSEGM** |  489446 |   38.45 |       100.00 |   38.45 |       100.00 |
+## |     **\<NA\>** |       0 |         |              |    0.00 |       100.00 |
+## |      **Total** | 1272833 |  100.00 |       100.00 |  100.00 |       100.00 |
+\end{verbatim}
+
+De las frecuencias podemos inferir:
+
+-Vemos una marcada mayoria de clientes ACTIVE BASE con mas del 96\%
+sobre los clientes REJOINER
+
+-Notamos que la moda es el segmento 4-No Tecno, dado a que acumula mas
+del 50\%
+
+-tenemos un 38.5\% en el segmento 99-NOSEGM esto nos dice que existen
+498.446 clientes ACTIVE/ REJOINER que realizaron menos de 3 recargas
+entre enero y marzo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Cantidad de clientes por segmento y grupo}
+\NormalTok{aux\_data}\OtherTok{\textless{}{-}}\NormalTok{Clientes\_Mar21 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(CL\_TECNO,BASE\_STAT\_03) }\SpecialCharTok{\%\textgreater{}\%}
+          \FunctionTok{summarise}\NormalTok{(}\AttributeTok{cant =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'CL_TECNO'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(aux\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{CL\_TECNO,}\AttributeTok{y=}\NormalTok{cant, }\AttributeTok{fill=}\NormalTok{BASE\_STAT\_03))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{,}\AttributeTok{color=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette=}\StringTok{\textquotesingle{}Set2\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Segmentos"}\NormalTok{,  }\AttributeTok{y=}\StringTok{"Cantidad de clientes"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Cantidad de clientes por segmento y grupo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-5-1.pdf}
+-Del grafico anterior podemos notar que la mayoria de los clientes
+REJOINER realizaron menos de TRES recargas en los ultimos tres meses.
+Sin embargo, para el resto de los segmentos, es notable la mayoria de
+los clientes ACTIVE BASE
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Cantidad de recargas por segm y grupo}
+\NormalTok{aux2 }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(CANT\_RECARGAS }\SpecialCharTok{\textasciitilde{}}\NormalTok{ CL\_TECNO }\SpecialCharTok{+}\NormalTok{ BASE\_STAT\_03, }\AttributeTok{data =}\NormalTok{ Clientes\_Mar21, }\AttributeTok{FUN =}\NormalTok{ sum)}
+\FunctionTok{ggplot}\NormalTok{(aux2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{CL\_TECNO,}\AttributeTok{y=}\NormalTok{CANT\_RECARGAS, }\AttributeTok{fill=}\NormalTok{BASE\_STAT\_03))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{,}\AttributeTok{color=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette=}\StringTok{\textquotesingle{}Set2\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Segmentos"}\NormalTok{,  }\AttributeTok{y=}\StringTok{"Cantidad de recargas"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Cantidad de recargas por segm y grupo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Monto de recargas por segmento y grupo}
+\NormalTok{aux3 }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(MONTO\_TOTAL }\SpecialCharTok{\textasciitilde{}}\NormalTok{ CL\_TECNO }\SpecialCharTok{+}\NormalTok{ BASE\_STAT\_03, }\AttributeTok{data =}\NormalTok{ Clientes\_Mar21, }\AttributeTok{FUN =}\NormalTok{ sum)}
+\FunctionTok{ggplot}\NormalTok{(aux3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{CL\_TECNO,}\AttributeTok{y=}\NormalTok{MONTO\_TOTAL, }\AttributeTok{fill=}\NormalTok{BASE\_STAT\_03))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{,}\AttributeTok{color=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette=}\StringTok{\textquotesingle{}Set2\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Segmentos"}\NormalTok{,  }\AttributeTok{y=}\StringTok{"Monto de recargas"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Monto de recargas por segm y grupo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-6-2.pdf}
+Respecto al MONTO y la CANTIDAD de recargas por segmento y grupo.
+
+-vemos una fuerte relacion entre estas variables, practicamente los
+graficos tienen una distribucion similar.
+
+-Tambien podemos ver que el semento dominante tanto en cantidad y en
+monto es 4-No Tecno, es decir, que los clientes siguen prefiriendo la
+recarga manual
+
+\emph{POR UN TEMA DE RENDIMINETO }para los siguientes graficos tomo una
+muestra de 10000 registros
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#TOMO UNA MUESTRA RANDOM DE n=10000 para agilizar los graficos}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10000}
+\NormalTok{cli\_sample }\OtherTok{\textless{}{-}}\NormalTok{ Clientes\_Mar21[}\FunctionTok{sample}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(Clientes\_Mar21),n,}\AttributeTok{replace =} \ConstantTok{FALSE}\NormalTok{),]}
+
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{filter}\NormalTok{(cli\_sample, CL\_TECNO}\SpecialCharTok{!=}\StringTok{\textquotesingle{}99{-}NOSEGM\textquotesingle{}}\NormalTok{), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{CL\_TECNO, }\AttributeTok{y=}\NormalTok{CANT\_RECARGAS, }\AttributeTok{fill =}\NormalTok{ CL\_TECNO)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun=}\NormalTok{mean, }\AttributeTok{geom=}\StringTok{"point"}\NormalTok{, }\AttributeTok{shape=}\DecValTok{2}\NormalTok{, }\AttributeTok{size=}\DecValTok{3}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Segmentacon"}\NormalTok{,  }\AttributeTok{y=}\StringTok{"Recargas "}\NormalTok{,}\AttributeTok{color=}\StringTok{"Tipo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{filter}\NormalTok{(cli\_sample, CL\_TECNO}\SpecialCharTok{!=}\StringTok{\textquotesingle{}99{-}NOSEGM\textquotesingle{}}\NormalTok{), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{CL\_TECNO, }\AttributeTok{y=}\NormalTok{MONTO\_TOTAL, }\AttributeTok{fill =}\NormalTok{ CL\_TECNO)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun=}\NormalTok{mean, }\AttributeTok{geom=}\StringTok{"point"}\NormalTok{, }\AttributeTok{shape=}\DecValTok{2}\NormalTok{, }\AttributeTok{size=}\DecValTok{3}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Segmentacon"}\NormalTok{,  }\AttributeTok{y=}\StringTok{"Monto"}\NormalTok{,}\AttributeTok{color=}\StringTok{"Tipo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-7-2.pdf}
+En los graficos de box plot, tanto para MONTO y CANTIDAD
+
+-Notamos gran cantidad de valores atipicos (outliers), mas alla de los
+casos extremos leves
+
+-vemos tambien una gran similitud en la dispersion de los segmentos 1,2
+y 4
+
+-La mediana es muy similar en los segmentos 1 y 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# MONTO por segmento}
+\NormalTok{cli\_sample}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{filter}\NormalTok{( CL\_TECNO}\SpecialCharTok{!=}\StringTok{\textquotesingle{}99{-}NOSEGM\textquotesingle{}}\NormalTok{ ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{MONTO\_TOTAL,}\AttributeTok{fill=}\NormalTok{CL\_TECNO,}\AttributeTok{color=}\NormalTok{CL\_TECNO))}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{CL\_TECNO) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{( }\AttributeTok{binwidth=}\DecValTok{1}\NormalTok{,}\AttributeTok{show.legend=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.9}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Montos"}\NormalTok{,}\AttributeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# RECARGAS por segmento}
+\NormalTok{cli\_sample}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{filter}\NormalTok{( CL\_TECNO}\SpecialCharTok{!=}\StringTok{\textquotesingle{}99{-}NOSEGM\textquotesingle{}}\NormalTok{ ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{CANT\_RECARGAS,}\AttributeTok{fill=}\NormalTok{CL\_TECNO,}\AttributeTok{color=}\NormalTok{CL\_TECNO))}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{CL\_TECNO) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{( }\AttributeTok{binwidth=}\DecValTok{1}\NormalTok{,}\AttributeTok{show.legend=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.9}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Recargas"}\NormalTok{,}\AttributeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TpN1_Punto3_4_files/figure-latex/unnamed-chunk-8-2.pdf}
+Como conclusión sobre el comportamiento de los segmentos, respecto al
+monto y a la cantidad de recargas. Podríamos decir:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Más allá del segmento que se estudie, una marcada relación entre las
+  variables MONTO\_TOTAL y CANT\_RECARGAS
+\item
+  EL 21.6\% de los clientes el canal tecnológico para realizar recargas,
+  está lejos del 40\% de clientes que no lo uso nunca, lo cual podría
+  ser una dificultad a la hora de plantear una migración.
+\item
+  En los meses estudiados, el segmento predominante, tanto en recargas
+  como en monto, fue el ``4-No Tecno''. Esto nos dice que casi el 40\%
+  de los clientes NO UTILIZA canales de recargas tecnológicos.
+\item
+  Hay un 38.5\% de clientes ACTIVE BASE o REJOINER que no realizaron
+  cargas significativas (menos de 3) en los meses estudiados.
+\end{enumerate}
+
+\end{document}
