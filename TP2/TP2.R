@@ -30,7 +30,7 @@ length(unique(data_cli$ID)) == nrow(data_cli)
 data_cli <- select(data_cli,-ID)
 
 #------------------------------------------------------------------------------
-#*****************************PUNTO 1******************************************
+#*****************************PUNTO 2******************************************
 #------------------------------------------------------------------------------
 
 #VARIABLES CUALITATIVAS:
@@ -55,7 +55,7 @@ data_cli <- select(data_cli,-ID)
 #         sabemos cuál es su sueldo real, porque lo acredita en otro banco.
 
 #------------------------------------------------------------------------------
-#*****************************PUNTO 2******************************************
+#*****************************PUNTO 3******************************************
 #------------------------------------------------------------------------------
 
 #Casteo de variables char a factor
@@ -70,25 +70,35 @@ summary(data_cli)
 view(dfSummary(data_cli))
 view(freq(data_cli, plain.ascii = FALSE, style = "rmarkdown"))
 view(descr(data_cli))
+quantile(data_cli$CONSUMO_TC)
+freq(data_cli$COLOR)
 
+descr(data_cli$ANTIGUEDAD)
+
+#COLOR: vemos que VERDE es la categoria con mas Clientes, con 40.55%
 
 #TIENE_PIN: notamos que esta variables contiene un error de carga
 #           hay 65 registros con el valor "2" cuando se trata de una variables "si/no"
 
 #SUELDO: es la única variables con valores missing en mas del 72% de los registros.
-#        tambien vemos posibles outliers en los valores maximos y minimos
+#        también vemos posibles outliers, con valores maximos y minimos muy extremos
+
+#CLIENTE_PAS: no aporta valor dado a que tiene una dependencia con SUELDO.
 
 #EDAD: Vemos valores outliers en ambos extremos, valores como 900 y 12 suponen
 #       error de carga
 
+#CONSUMO_TC: casi el 50% de los registros tiene como valor CERO
 
-ggplot(data_cli, aes(x=COLOR, fill=COLOR )) +  
-  geom_bar(stat="count", width=0.4, ) +
-  scale_fill_manual(values = c("blue","red","green", "violet") ) +
-  theme(legend.position="none")+
-  labs(x="Cat Crediticia",  y="Cantidad Clientes")+
-  ggtitle("Cantidad de clientes por categoria")
+#ANTIGUEDAD: la media es significativamente mayor a la mediana. esto supone
+#             una distribución con sesgo hacia la derecha.
 
+
+#------------------------------------------------------------------------------
+#ANALISIS UNIVARIADO
+#------------------------------------------------------------------------------
+
+#Movimientos de cuenta a 90dias por categoria
 ggplot(data_cli, aes(x=COLOR,y=MOV90_CTA ,fill=COLOR )) +  
   geom_bar(stat="identity", width=0.4 ,position = "dodge") +
   scale_fill_manual(values = c("blue","red","green", "violet") ) +
@@ -100,28 +110,8 @@ ggplot(data_cli, aes(x=COLOR,y=MOV90_CTA ,fill=COLOR )) +
 
 
 
-ggplot(data_cli, aes(x=TIENE_PIN, y=MOV90_CTA, fill = CLIENTE_PAS ))+
-  geom_bar(stat="identity", width=0.7, position = "dodge")+
-  labs(x="Tiene pin",  y="mov cta 90d")+
-  ggtitle("Cantidad de paises por region ")
 
-
-treemap(data_cli, index=c("COLOR","VT"), vSize="MOV90_CTA", type="index",
-        fontsize.labels=c(15,9),                # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
-        fontcolor.labels=c("white","black"),     # Color of labels
-        fontface.labels=c(2,1),                  # Font of labels: 1,2,3,4 for normal, bold, italic, bold-italic...
-        bg.labels=c("transparent"),              # Background color of labels
-        align.labels=list(
-          c("center", "center"), 
-          c("right", "bottom")
-        ),                                   # Where to place labels in the rectangle?
-        overlap.labels=0.5,                      # number between 0 and 1 that determines the tolerance of the overlap between labels. 0 means that labels of lower levels are not printed if higher level labels overlap, 1  means that labels are always printed. In-between values, for instance the default value .5, means that lower level labels are printed if other labels do not overlap with more than .5  times their area size.
-        inflate.labels=F,                        # If true, labels are bigger when rectangle is bigger.
-        
-)
-
-
-plot(data_cli$MOV90_CTA,data_cli$Med_cada1000)
+plot(data_cli$CONSUMO_TC)
 
 
 summary(filter(data_cli,EDAD > 99))
