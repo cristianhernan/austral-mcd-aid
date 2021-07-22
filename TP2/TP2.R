@@ -75,28 +75,58 @@ freq(data_cli$COLOR)
 
 descr(data_cli$ANTIGUEDAD)
 
-#COLOR: vemos que VERDE es la categoria con mas Clientes, con 40.55%
+hist(data_cli$EDAD)
 
-#TIENE_PIN: notamos que esta variables contiene un error de carga
-#           hay 65 registros con el valor "2" cuando se trata de una variables "si/no"
+#VARIABLES CUANTITAVIAS:
+#------------------------
 
-#SUELDO: es la única variables con valores missing en mas del 72% de los registros.
-#        también vemos posibles outliers, con valores maximos y minimos muy extremos
+##EDAD: 
+#	-No tiene missings
+#	-Notamos outliers, los cuales suponen un error de carga.
+#	-Quitando los outliers vemos que tiene una distribucion aproximamente
+#	 normal
+#
+##ANTIGUEDAD:
+#	-No tiene missings.
+#	-Notamos outliers pero son valores factibles, no supone error de carga.
+#	-La media es significativamente mayor a la mediana. esto supone una
+#	 distribución con sesgo hacia la derecha.
+#
+##SUELDO: 
+#	-Posee missings en mas de un 72%
+#	-Notamos outliers con valores logicos pero poco factibles para el estudio
+#	-Notamos una distribucion algo corrida hacia la derecha.
+#
+##CONSUMO_TC: 
+#	-No encontramos missings
+#	-Casi el 50% de los registros tiene como valor CERO
+#	-Posee outliers con valores muy altos los cuales suponen error.
+#
+##MOV90_CTA:
+#	-No encontramos missings
+#	-presenta outliers.
+#	-tambien vemos una distribucion con sesgo hacia la derecha.
 
-#CLIENTE_PAS: no aporta valor dado a que tiene una dependencia con SUELDO.
 
-#EDAD: Vemos valores outliers en ambos extremos, valores como 900 y 12 suponen
-#       error de carga
-
-#CONSUMO_TC: casi el 50% de los registros tiene como valor CERO
-
-#ANTIGUEDAD: la media es significativamente mayor a la mediana. esto supone
-#             una distribución con sesgo hacia la derecha.
-
+##VARIABLES CUALITATIVAS:
+#------------------------
+#
+##TIENE_PIN:
+#	-Si bien no hay missings, notamos errores de carga en 65 registros.
+#
+##CLIENTE_PAS:
+#	-no aporta valor dado a que tiene dependencia con la variable sueldo.
 
 #------------------------------------------------------------------------------
+#*****************************PUNTO 4******************************************
+#------------------------------------------------------------------------------
+
 #ANALISIS UNIVARIADO
-#------------------------------------------------------------------------------
+#-------------------
+
+
+#ANALISIS BIVARIADO
+#-------------------
 
 #Movimientos de cuenta a 90dias por categoria
 ggplot(data_cli, aes(x=COLOR,y=MOV90_CTA ,fill=COLOR )) +  
@@ -111,14 +141,21 @@ ggplot(data_cli, aes(x=COLOR,y=MOV90_CTA ,fill=COLOR )) +
 
 
 
-plot(data_cli$CONSUMO_TC)
+plot(data_cli$MOV90_CTA)
+
+hist(data_cli$MOV90_CTA)
+
+hist(filter(data_cli,SUELDO < 100000)$SUELDO)
 
 
-summary(filter(data_cli,EDAD > 99))
-
-
-
-
+# 2. Defina el tipo de variable: cualitativa o cuantitativa
+# 3. Realice estadísticos descriptivos para cada una de las variables según corresponda. Describa lo que ve para cada variable.
+# 4. Realice gráficos univariados y bivariados de las variables según corresponda
+# 5. Chequee outliers en forma gráfica. Defina para tres variables con outliers que podría hacer con ellos y justifique.
+# 6. Calcule la distancia de mahalanobis y grafique mostrando los outliers
+# 7. Realice correlogramas y gráfico de perfiles para las variables que correspondan
+# 8. Seleccione una muestra del 20% de forma simple aleatoria sin reposición y compruebe si el porcentaje de Churn es igual en la muestra que en el dataset real.
+# 9. Responder las preguntas en el script y solo se requiere el script de los gráficos.
 
 
 
